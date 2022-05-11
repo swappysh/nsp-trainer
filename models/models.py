@@ -65,14 +65,14 @@ class ModelNSP(nn.Module):
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, next_sentence_label=None, \
             position_ids=None, head_mask=None, labels=None):
 
-        if 'Roberta' in self.model_class or 'GPT2' in self.model_class:
+        if 'Roberta' in self.model_class or 'GPT2' in self.model_class or 'Distil' in self.model_class:
             outputs = self.core_model(input_ids, attention_mask=attention_mask)#, token_type_ids=token_type_ids)
         else:
             outputs = self.core_model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
 
         # assert len(outputs)==2
 
-        if 'gpt2' in self.model_class.lower():
+        if 'gpt2' in self.model_class.lower() or 'Deberta' in self.model_class or 'Distil' in self.model_class:
             output = outputs[0].mean(dim=1)
             logits = self.nsp_head(output)
         elif 'XLNet' in self.model_class: 
