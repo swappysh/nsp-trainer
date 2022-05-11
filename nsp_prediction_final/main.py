@@ -29,8 +29,9 @@ def parse_args():
     args.add_argument("--no-cuda", default=False, action="store_true")
     args.add_argument("--dataset", default="out", type=str)
     args.add_argument("--model", default="RobertaModel", choices=["XLNetModel", "RobertaModel", "BertModel", \
-            "GPT2Model", "DebertaModel", "DistilBertModel"])
-    args.add_argument("--pretrained-class", default="roberta-base", choices=["microsoft/deberta-base", "distilbert-base-uncased", "bert-base-uncased"]) 
+            "GPT2Model", "DebertaModel", "DistilBertModel", "ElectraModel"])
+    args.add_argument("--pretrained-class", default="roberta-base", choices=["microsoft/deberta-base", \
+            "distilbert-base-uncased", "bert-base-uncased", "google/electra-large-discriminator"]) 
     args.add_argument("--epochs", default=1, type=int)
     args.add_argument("--data-frac", default=0.1, type=float)
     args.add_argument("--skip-frac", default=0.003, type=float, help="Amount of training data to skip from the beginning.")
@@ -38,7 +39,8 @@ def parse_args():
     args.add_argument("--core-lr", default=5e-6, type=float)
     args.add_argument("--head-lr", default=1e-3, type=float)
     args.add_argument("--weight-decay", default=1e-2, type=float)
-    args.add_argument("--tokenizer", default="RobertaTokenizer", choices=["DebertaTokenizer", "DistilBertTokenizer", "BertTokenizer"])
+    args.add_argument("--tokenizer", default="RobertaTokenizer", choices=["DebertaTokenizer", \
+            "DistilBertTokenizer", "BertTokenizer", "ElectraTokenizer"])
     args.add_argument("--saved-model", default=None)
     args.add_argument("--test", default=False, action="store_true")
     args.add_argument("--fp16", default=False, action="store_true")

@@ -46,7 +46,7 @@ class GPT2LM(transformers.GPT2PreTrainedModel):
 class ModelNSP(nn.Module):
     def __init__(self, pretrained_model, nsp_dim=300):
         super(ModelNSP, self).__init__()
-        self.pretrained2model = {"xlnet": "XLNetModel", "bert": "BertModel", "roberta": "RobertaModel", "gpt2": "GPT2Model", "microsoft/deberta": "DebertaModel", "distilbert": "DistilBertModel"}
+        self.pretrained2model = {"xlnet": "XLNetModel", "bert": "BertModel", "roberta": "RobertaModel", "gpt2": "GPT2Model", "microsoft/deberta": "DebertaModel", "distilbert": "DistilBertModel", "google/electra": "ElectraModel"}
         self.model_class = self.pretrained2model[pretrained_model.lower().split("-")[0]]
         self.core_model = getattr(transformers, self.model_class).from_pretrained(pretrained_model)
         self.core_model.train()
@@ -72,7 +72,8 @@ class ModelNSP(nn.Module):
 
         # assert len(outputs)==2
 
-        if 'gpt2' in self.model_class.lower() or 'Deberta' in self.model_class or 'Distil' in self.model_class:
+        if 'gpt2' in self.model_class.lower() or 'Deberta' in self.model_class or 'Distil' in self.model_class or \
+                'Electra' in self.model_class:
             output = outputs[0].mean(dim=1)
             logits = self.nsp_head(output)
         elif 'XLNet' in self.model_class: 
