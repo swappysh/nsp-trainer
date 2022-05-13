@@ -11,7 +11,7 @@ python3 main.py --model BertModel --pretrained-class bert-base-uncased --core-lr
 python3 main.py --model BertModel --pretrained-class bert-base-uncased --core-lr 5e-5 --tokenizer BertTokenizer
 ```
 ```bash
-python3 main.py --model ElectraModel --pretrained-class google/electra-large-discriminator --core-lr 5e-5 --tokenizer ElectraTokenizer
+python3 main.py --model ElectraModel --pretrained-class google/electra-large-discriminator --core-lr 5e-5 --tokenizer ElectraTokenizer --batch-size 8
 ```
 ```bash
 python3 main.py --model DistilBertModel --pretrained-class distilbert-base-uncased --core-lr 5e-5 --tokenizer DistilBertTokenizer
